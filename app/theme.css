@@ -1,0 +1,93 @@
+@import "tailwindcss";
+/* Общая тема экосистемы РСО: подключается из globals.css каждого приложения */
+@source "./";
+
+/* Шрифты раздаются с нашего домена (fontsource): без запросов к Google, подходит под CSP 'self'.
+   Браузер скачивает только нужные наборы символов (unicode-range). */
+@import "@fontsource/roboto/400.css";
+@import "@fontsource/roboto/500.css";
+@import "@fontsource/roboto/700.css";
+@import "@fontsource/fira-sans/500.css";
+@import "@fontsource/fira-sans/600.css";
+@import "@fontsource/fira-sans/700.css";
+@import "@fontsource/fira-sans/800.css";
+@import "@fontsource/onest/500.css";
+@import "@fontsource/onest/600.css";
+@import "@fontsource/cormorant-garamond/700.css";
+
+/* Стиль РСО 2.0: тёмно-синий основной, красный акцент, белый */
+@theme {
+  --color-navy: #16337f;
+  --color-navy-2: #2145a0;
+  --color-navy-deep: #0d2158;
+  --color-gold: #d52b1e;
+  --color-gold-dark: #b0231a;
+  --color-gold-light: #ffffff;
+  --color-gold-soft: #fdecea;
+  --color-ivory: #ffffff;
+  --color-ink: #121621;
+  --color-muted: #5f6672;
+  --color-line: #e5e7eb;
+  --color-surface: #f3f4f6;
+  --color-danger: #b42318;
+
+  /* Акценты кабинета: синий — основной, золото — выделение */
+  --color-brand: #16337f;
+  --color-brand-dark: #0d2158;
+  --color-brand-soft: #eef2fb;
+  --color-accent: #16337f;
+  --color-accent-dark: #0d2158;
+  --color-accent-soft: #eef2fb;
+
+  --font-sans: "Roboto", Arial, sans-serif;
+  --font-display: "Fira Sans", "Roboto", Arial, sans-serif;
+  --font-nav: "Onest", Arial, sans-serif;
+  --font-serif: "Cormorant Garamond", Georgia, serif;
+  --font-mono: "Fira Sans", Arial, sans-serif;
+  --ease-out-soft: cubic-bezier(.22, .61, .36, 1);
+}
+
+html {
+  color-scheme: light;
+}
+
+body {
+  background: #ffffff;
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 2px;
+}
+/* поля поиска в белой «пилюле» — без красной рамки: фокус и так виден */
+input[aria-label="Поиск по платформе"]:focus-visible { outline: none; }
+
+html, body { overflow-x: clip; }
+
+/* Надзаголовок в стиле РСО */
+.label-mono {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+}
+
+/* Плавное увеличение фото при наведении */
+.zoom img, .zoom .ph-inner { transition: transform .8s var(--ease-out-soft); }
+.zoom:hover img, .zoom:hover .ph-inner { transform: scale(1.05); }
+
+@media (prefers-reduced-motion: reduce) {
+  .zoom img, .zoom .ph-inner { transition: none; }
+}
+
+/* Вход/регистрация: место под полосу прокрутки всегда занято — фото одинаковой ширины на всех страницах */
+html:has(.auth) { scrollbar-gutter: stable; }
